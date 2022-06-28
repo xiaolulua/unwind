@@ -75,23 +75,25 @@ extern "C" void __load_registers_x86_64(CommonRegisters<GPRs_x86_64> *);
 template<>
 class CommonRegisters<GPRs_x86_64> {
 public:
+    typedef GPRs_x86_64::reg_t reg_t;
+
     CommonRegisters();
     explicit CommonRegisters(const void * registers);
 
     static bool validRegister(int regId);
-    GPRs_x86_64::reg_t getRegister(int regId) const;
-    void setRegister(int regId, GPRs_x86_64::reg_t val);
+    reg_t getRegister(int regId) const;
+    void setRegister(int regId, reg_t val);
 
     static const char * getRegisterName(int regId);
     void jumpTo();
     static int lastDwarfRegNum();
     static int getArch();
 
-    GPRs_x86_64::reg_t getSP() const;
-    void setSP(GPRs_x86_64::reg_t val);
+    reg_t getSP() const;
+    void setSP(reg_t val);
 
-    GPRs_x86_64::reg_t getIP() const;
-    void setIP(GPRs_x86_64::reg_t val);
+    reg_t getIP() const;
+    void setIP(reg_t val);
 
 private:
     GPRs_x86_64 _registers;
@@ -157,7 +159,7 @@ inline GPRs_x86_64::reg_t CommonRegisters<GPRs_x86_64>::getRegister(int regId) c
     }
 }
 
-inline void CommonRegisters<GPRs_x86_64>::setRegister(int regId, GPRs_x86_64::reg_t val) {
+inline void CommonRegisters<GPRs_x86_64>::setRegister(int regId, reg_t val) {
     switch (regId) {
         case UNW_REG_IP:
         case UNW_X86_64_RIP :
@@ -278,7 +280,7 @@ inline GPRs_x86_64::reg_t CommonRegisters<GPRs_x86_64>::getSP() const {
     return _registers.__rsp;
 }
 
-inline void CommonRegisters<GPRs_x86_64>::setSP(GPRs_x86_64::reg_t val) {
+inline void CommonRegisters<GPRs_x86_64>::setSP(reg_t val) {
     _registers.__rsp = val;
 }
 
@@ -286,7 +288,7 @@ inline GPRs_x86_64::reg_t CommonRegisters<GPRs_x86_64>::getIP() const {
     return _registers.__rip;
 }
 
-inline void CommonRegisters<GPRs_x86_64>::setIP(GPRs_x86_64::reg_t val) {
+inline void CommonRegisters<GPRs_x86_64>::setIP(reg_t val) {
     _registers.__rip = val;
 }
 
